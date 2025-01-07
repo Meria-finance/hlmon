@@ -1,0 +1,19 @@
+services:
+
+  hlmon:
+    build: ./hlmon
+    container_name: hlmon
+    volumes:
+      - ${PWD}/configs/hlmon-config.toml:/app/config.toml:ro
+      - YOUR_LOG_PATH:/logs:ro
+      - YOUR_UNJAIL_SCRIPT:./unjail.sh
+    restart: always
+  
+  updatemon:
+    build: ./updatemon
+    container_name: updatemon
+    volumes:
+      - ${PWD}/configs/updatemon-config.toml:/app/config.toml:ro
+      - YOUR_HL_VISOR_PATH:/data/hl-visor
+      - YOUR_HL_NODE_PATH:/data/hl-node
+    restart: always
